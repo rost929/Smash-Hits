@@ -3,8 +3,9 @@ import { AppModule } from "../../app.module";
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../../users/user.model';
 import { Song } from '../../songs/song.model';
-import { PlayList } from '../../playlists/playlist.model';
-import { PlayList_Song } from '../../playlist-song/playlist-song.model';
+import { Playlist } from '../../playlists/playlist.model';
+import { Playlist_Song } from '../../playlist-song/playlist-song.model';
+import { User_Playlist } from "../../user-playlist/user-playlist.model";
 import * as bcrypt from 'bcrypt';
 
 async function seed() {
@@ -78,16 +79,22 @@ async function seed() {
         { title: 'Sussudio', artist: 'Phil Collins', album: 'No Jacket Required', duration: '04:23', gender: 'Pop', releaseDate: new Date('1985-01-01') },
     ]);
 
-    const playlists = await PlayList.bulkCreate([
-        { title: 'Salsa', description: 'Best Salsa Hits', userId: users[0].id },
-        { title: 'Rock', description: 'Best Rock hits', userId: users[1].id },
-        { title: 'Eighties', description: 'Best Eighties hits', userId: users[2].id },
+    const playlists = await Playlist.bulkCreate([
+        { title: 'Salsa', description: 'Best Salsa Hits', userId: users[0].id, isPublic: false },
+        { title: 'Rock', description: 'Best Rock hits', userId: users[1].id, isPublic: false },
+        { title: 'Eighties', description: 'Best Eighties hits', userId: users[2].id, isPublic: true },
     ]);
 
-    await PlayList_Song.bulkCreate([
+    await Playlist_Song.bulkCreate([
         ...salsaSongs.map((song) => ({ playListId: playlists[0].id, songId: song.id })),
         ...rockSongs.map((song) => ({ playListId: playlists[1].id, songId: song.id })),
         ...eightiesSongs.map((song) => ({ playListId: playlists[2].id, songId: song.id })),
+    ]);
+
+    await User_Playlist.bulkCreate([
+        { userId: users[0].id, playListId: playlists[0].id },
+        { userId: users[1].id, playListId: playlists[1].id },
+        { userId: users[2].id, playListId: playlists[2].id },
     ]);
 
     console.log('Seed data has been inserted');

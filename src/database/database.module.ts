@@ -3,8 +3,9 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from '../users/user.model';
 import { Song } from '../songs/song.model';
-import { PlayList } from '../playlists/playlist.model';
-import { PlayList_Song } from '../playlist-song/playlist-song.model';
+import { Playlist } from '../playlists/playlist.model';
+import { Playlist_Song } from '../playlist-song/playlist-song.model';
+import { User_Playlist } from '../user-playlist/user-playlist.model';
 @Module({
     imports: [
         ConfigModule.forRoot(),
@@ -19,7 +20,7 @@ import { PlayList_Song } from '../playlist-song/playlist-song.model';
                     username: dbConfig.username,
                     password: dbConfig.password,
                     database: dbConfig.name,
-                    models: [User, Song, PlayList, PlayList_Song],
+                    models: [User, Song, Playlist, Playlist_Song, User_Playlist],
                     autoLoadModels: true,
                     synchronize: true,
                 };

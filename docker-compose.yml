@@ -5,11 +5,11 @@ services:
     image: postgres:latest
     container_name: smash-hits-container
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: root1234!
-      POSTGRES_DB: smash-hits
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
     volumes:
       - postgres-data:/var/lib/postgresql/data
   pgadmin:

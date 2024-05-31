@@ -1,20 +1,20 @@
 import { Table, Column, Model, ForeignKey, DataType } from 'sequelize-typescript';
+import { User } from '../users/user.model';
 import { Playlist } from '../playlists/playlist.model';
-import { Song } from '../songs/song.model';
 
 @Table
-export class Playlist_Song extends Model<Playlist_Song> {
+export class User_Playlist extends Model<User_Playlist> {
+    @ForeignKey(() => User)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    userId: number;
+
     @ForeignKey(() => Playlist)
     @Column({
         type: DataType.INTEGER,
         allowNull: false,
     })
     playListId: number;
-
-    @ForeignKey(() => Song)
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    songId: number;
 }

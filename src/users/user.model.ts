@@ -1,5 +1,6 @@
-import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
-import { PlayList } from '../playlists/playlist.model';
+import { Table, Column, Model, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Playlist } from '../playlists/playlist.model';
+import { User_Playlist } from "../user-playlist/user-playlist.model";
 
 @Table
 export class User extends Model<User> {
@@ -34,6 +35,6 @@ export class User extends Model<User> {
     })
     createdAt: Date;
 
-    @HasMany(() => PlayList)
-    playLists: PlayList[];
+    @BelongsToMany(() => Playlist, () => User_Playlist)
+    playLists: Playlist[];
 }

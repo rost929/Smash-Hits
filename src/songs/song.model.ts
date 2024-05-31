@@ -1,6 +1,6 @@
 import { Table, Column, Model, DataType, BelongsToMany } from 'sequelize-typescript';
-import { PlayList } from '../playlists/playlist.model';
-import { PlayList_Song } from '../playlist-song/playlist-song.model';
+import { Playlist } from '../playlists/playlist.model';
+import { Playlist_Song } from '../playlist-song/playlist-song.model';
 
 @Table
 export class Song extends Model<Song> {
@@ -38,6 +38,6 @@ export class Song extends Model<Song> {
     })
     releaseDate: Date;
 
-    @BelongsToMany(() => PlayList, () => PlayList_Song)
-    playLists: PlayList[];
+    @BelongsToMany(() => Playlist, () => Playlist_Song)
+    playLists: Playlist[];
 }
