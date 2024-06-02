@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from "../../app.module";
 import { Sequelize } from 'sequelize-typescript';
-import { User } from '../../users/user.model';
+import { User } from '../../users/models/user.model';
 import { Song } from '../../songs/song.model';
 import { Playlist } from '../../playlists/playlist.model';
 import { Playlist_Song } from '../../playlist-song/playlist-song.model';

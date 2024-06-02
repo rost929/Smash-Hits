@@ -12,4 +12,5 @@ export default registerAs('config', () => ({
         email: process.env.PGADMIN_DEFAULT_EMAIL,
         password: process.env.PGADMIN_DEFAULT_PASSWORD,
     },
+    jwtSecret: process.env.JWT_SECRET
 }));
