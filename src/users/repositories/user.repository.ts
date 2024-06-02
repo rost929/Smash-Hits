@@ -17,4 +17,8 @@ export class UserRepository {
             }}
         );
     }
+
+    async create(user) : Promise<User> {
+        return this.userModel.create(user);
+    }
 }

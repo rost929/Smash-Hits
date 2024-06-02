@@ -1,10 +1,7 @@
-import { IsEmail, IsNotEmpty, IsString, Matches, MinLength, isString } from "class-validator";
-import { UserDto } from "src/users/dtos/user.dto";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, Matches, MinLength, isNotEmpty, isString } from "class-validator";
+
 export class SignUpDto {
-
-    @IsString()
-    username: string
-
+    @IsOptional()
     @IsString()
     name: string
 
