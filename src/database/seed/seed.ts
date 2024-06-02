@@ -77,9 +77,9 @@ async function seed() {
     ]);
 
     const playlists = await Playlist.bulkCreate([
-        { title: 'Salsa', description: 'Best Salsa Hits', userId: users[0].id, isPublic: false },
-        { title: 'Rock', description: 'Best Rock hits', userId: users[1].id, isPublic: false },
-        { title: 'Eighties', description: 'Best Eighties hits', userId: users[2].id, isPublic: true },
+        { title: 'Salsa', description: 'Best Salsa Hits', isPublic: false },
+        { title: 'Rock', description: 'Best Rock hits', isPublic: false },
+        { title: 'Eighties', description: 'Best Eighties hits', isPublic: true },
     ]);
 
     await Playlist_Song.bulkCreate([

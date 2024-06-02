@@ -7,13 +7,6 @@ import { User_Playlist } from "../user-playlist/user-playlist.model";
 @Table
 export class Playlist extends Model<Playlist> {
 
-    @ForeignKey(() => User)
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    userId: number;
-
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -35,9 +28,6 @@ export class Playlist extends Model<Playlist> {
         defaultValue: DataType.NOW,
     })
     createdAt: Date;
-
-    @BelongsTo(() => User)
-    user: User;
 
     @BelongsToMany(() => User, () => User_Playlist)
     users: User[];

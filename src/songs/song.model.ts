@@ -39,5 +39,5 @@ export class Song extends Model<Song> {
     releaseDate: Date;
 
     @BelongsToMany(() => Playlist, () => Playlist_Song)
-    playLists: Playlist[];
+    playlists: Playlist[];
 }
