@@ -20,12 +20,15 @@ export class UserService {
 
     async findByEmail(email : string): Promise<UserDto> {
         const user: User = await this.userRepository.findByEmail(email);
-        return {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            name: user.name,
-            password: user.password
-        };
+        if (user) {
+            return {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                name: user.name,
+                password: user.password
+            };
+        }
+        return;
     }
 }

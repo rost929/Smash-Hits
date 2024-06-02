@@ -3,7 +3,8 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserService } from '../../users/services/user.service';
-import { User } from '../../users/models/user.model';
+import { LoginDto } from '../dtos/login.dto';
+import { loginResponse } from '../dtos/loginResponse.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,29 +13,34 @@ export class AuthService {
         private jwtService: JwtService,
     ) { }
 
-    async login(user: User) {
-        const isValidUser = await this.validateUser(user.email, user.password);
-        if (isValidUser) return this.generateJWT(user);
-        return;
+    async login(user: LoginDto) : Promise<loginResponse> {
+        const loginInfo = await this.validateUser(user.email, user.password);
+        if (loginInfo.validCredentials) return this.generateJWT(loginInfo);
+        return loginInfo;
     }
 
-    private async validateUser(email: string, password: string): Promise<boolean> {
+    private async validateUser(email: string, password: string): Promise<loginResponse> {
         const user = await this.usersService.findByEmail(email);
         if (user) {
             const isMatch = await bcrypt.compare(password, user.password);
-            if (isMatch) return true;
+            if (isMatch) return { email: user.email, validCredentials: true }
+            return {
+                email: user.email,
+                validCredentials: false,
+                message: `Wrong credentials, mail or password invalid`
+            }
         }
-        return false;
+        return {
+            email: null,
+            validCredentials: false,
+            message: `email not registered`
+        };
     }
 
-    private async generateJWT(user: User) {
-        return {
-            access_token: this.jwtService.sign({ 
-                username: user.username, 
-                id: user.id, 
-                mail: user.email 
-            }),
-            user,
+    private async generateJWT(loginInfo: loginResponse) {
+        return { 
+            access_token: this.jwtService.sign({ email: loginInfo.email }), 
+            ...loginInfo 
         };
-    }    
+    }
 }

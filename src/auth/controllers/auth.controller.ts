@@ -1,21 +1,21 @@
-import { Controller, HttpStatus, Post, Request, Response, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Request, Response, ValidationPipe ,UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../services/auth.service';
+import { LoginDto } from "../dtos/login.dto";
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
  // @UseGuards(AuthGuard('jwt'))
   @Post('login')
-  async login(@Request() req, @Response() res) {
+  async login(@Body(new ValidationPipe()) userCredentials : LoginDto, @Response() res) {
 
-    const user = req.body.user;
-    const token = await this.authService.login(user);
+    const loginResponse = await this.authService.login(userCredentials);
 
-    if (!token) {
-      return res.status(400).send('User or password invalid')
+    if (loginResponse.validCredentials === false) {
+      return res.status(400).send(loginResponse)
     }
-    
-    res.status(HttpStatus.OK).json(token);
+
+    res.status(HttpStatus.OK).json(loginResponse);
   }
 }
