@@ -1,12 +1,10 @@
-import { Body, Controller, HttpStatus, Post, Request, Response, ValidationPipe ,UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, HttpStatus, Post, Response, ValidationPipe } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { LoginDto } from "../dtos/login.dto";
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
- // @UseGuards(AuthGuard('jwt'))
   @Post('login')
   async login(@Body(new ValidationPipe()) userCredentials : LoginDto, @Response() res) {
 

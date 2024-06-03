@@ -3,7 +3,7 @@ import { AppModule } from "../../app.module";
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../../users/models/user.model';
 import { Song } from '../../songs/song.model';
-import { Playlist } from '../../playlists/playlist.model';
+import { Playlist } from '../../playlists/models/playlist.model';
 import { Playlist_Song } from '../../playlist-song/playlist-song.model';
 import { User_Playlist } from "../../user-playlist/user-playlist.model";
 import * as bcrypt from 'bcrypt';
@@ -21,16 +21,19 @@ async function seed() {
 
     const users = await User.bulkCreate([
         {
+            id: 1,
             email: 'han.solo@example.com',
             password: await hashPassword('Password123!'),
             name: 'Han Solo',
         },
         {
+            id: 2,
             email: 'christoph.waltz@example.com',
             password: await hashPassword('Password123!'),
             name: 'Christoph Waltz',
         },
         {
+            id: 3,
             email: 'quentin.tarantino@example.com',
             password: await hashPassword('Password123!'),
             name: 'Quentin Tarantino',
@@ -83,15 +86,15 @@ async function seed() {
     ]);
 
     await Playlist_Song.bulkCreate([
-        ...salsaSongs.map((song) => ({ playListId: playlists[0].id, songId: song.id })),
-        ...rockSongs.map((song) => ({ playListId: playlists[1].id, songId: song.id })),
-        ...eightiesSongs.map((song) => ({ playListId: playlists[2].id, songId: song.id })),
+        ...salsaSongs.map((song) => ({ playlistId: playlists[0].id, songId: song.id })),
+        ...rockSongs.map((song) => ({ playlistId: playlists[1].id, songId: song.id })),
+        ...eightiesSongs.map((song) => ({ playlistId: playlists[2].id, songId: song.id })),
     ]);
 
     await User_Playlist.bulkCreate([
-        { userId: users[0].id, playListId: playlists[0].id },
-        { userId: users[1].id, playListId: playlists[1].id },
-        { userId: users[2].id, playListId: playlists[2].id },
+        { userId: users[0].id, playlistId: playlists[0].id },
+        { userId: users[1].id, playlistId: playlists[1].id },
+        { userId: users[2].id, playlistId: playlists[2].id },
     ]);
 
     console.log('Seed data has been inserted');

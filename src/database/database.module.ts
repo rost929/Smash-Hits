@@ -3,7 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from '../users/models/user.model';
 import { Song } from '../songs/song.model';
-import { Playlist } from '../playlists/playlist.model';
+import { Playlist } from '../playlists/models/playlist.model';
 import { Playlist_Song } from '../playlist-song/playlist-song.model';
 import { User_Playlist } from '../user-playlist/user-playlist.model';
 @Module({

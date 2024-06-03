@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, BelongsToMany } from 'sequelize-typescript';
-import { Playlist } from '../playlists/playlist.model';
+import { Playlist } from '../playlists/models/playlist.model';
 import { Playlist_Song } from '../playlist-song/playlist-song.model';
 
 @Table

@@ -7,6 +7,8 @@ import config from "./config";
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { RegistrationModule } from './registration/registration.module';
+import { PlaylistModule } from './playlists/playlist.module';
+import { UserPlaylistModule } from './user-playlist/user-playlist.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -17,7 +19,9 @@ import { RegistrationModule } from './registration/registration.module';
     DatabaseModule,
     UserModule,
     AuthModule,
-    RegistrationModule
+    RegistrationModule,
+    PlaylistModule,
+    UserPlaylistModule
   ],
   controllers: [AppController, ],
   providers: [AppService],
