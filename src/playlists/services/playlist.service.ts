@@ -1,12 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { PlaylistRepository } from "../repository/playlist.repository";
 import { UserService } from "../../users/services/user.service";
-import { CreatePlaylistDto } from "../dtos/CreatePlaylistDto";
+import { CreatePlaylistDto } from "../dtos/CreatePlaylist.dto";
 import { Playlist } from "../models/playlist.model";
-import { CreatePlaylistResponseDto } from "../dtos/CreatePlaylistResponseDto";
+import { CreatePlaylistResponseDto } from "../dtos/CreatePlaylistResponse.dto";
 import { UserPlaylistService } from "../../user-playlist/services/user-playlist.service";
 import { User_Playlist } from "../../user-playlist/user-playlist.model";
 import { Sequelize } from "sequelize-typescript";
+import { PlaylistResponseDto } from "../dtos/PlaylistReponse.dto";
 
 @Injectable()
 export class PlaylistService {
@@ -44,6 +45,15 @@ export class PlaylistService {
                 error: true
             }
         }
+    
+    }
+
+    async getAllPublic() : Promise<PlaylistResponseDto> {
+        const playlists : Playlist[] =  await this.playlistRepository.getAllPublicPlaylists();
+
+        if(playlists) return { playlists: playlists };
+
+        return { playlists: null, message: `No public playlists found`};
     }
 
     private buildNewPlaylist(playlist: CreatePlaylistDto): Playlist {

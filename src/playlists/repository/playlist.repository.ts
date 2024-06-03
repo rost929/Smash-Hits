@@ -10,4 +10,9 @@ export class PlaylistRepository {
     async create(playlist: Playlist, transaction: Transaction): Promise<Playlist> {
         return await this.playlistModel.create( playlist, { transaction } );
     }
+
+
+    async getAllPublicPlaylists () : Promise<Playlist[]> {
+        return await this.playlistModel.findAll({ where : { isPublic: true }})
+    }
 }
