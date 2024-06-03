@@ -4,6 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreatePlaylistResponseDto } from '../dtos/CreatePlaylistResponse.dto';
 import { PlaylistResponseDto } from "../dtos/PlaylistReponse.dto";
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
+import { OwnPlaylistDto } from '../dtos/OwnPlaylist.dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('playlists')
@@ -18,5 +19,10 @@ export class PlaylistController {
     @Get('all-public')
     async getAllPublic() : Promise<PlaylistResponseDto>  {
         return await this.playlistService.getAllPublic();
+    }
+
+    @Get('own')
+    async getAllOwn(@Query(new ValidationPipe()) emailOwner : OwnPlaylistDto ) : Promise<PlaylistResponseDto>  {
+        return await this.playlistService.getAllOwn(emailOwner);
     }
 }

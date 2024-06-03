@@ -7,9 +7,14 @@ import { PlaylistRepository } from './repository/playlist.repository';
 import { Playlist } from './models/playlist.model';
 import { UserPlaylistModule } from '../user-playlist/user-playlist.module';
 import { UserModule } from '../users/user.module';
+import { User } from '../users/models/user.model';
 
 @Module({
-    imports: [SequelizeModule.forFeature([Playlist]), UserModule, UserPlaylistModule],
+    imports: [
+        SequelizeModule.forFeature([Playlist]), 
+        SequelizeModule.forFeature([User]),
+        UserModule, 
+        UserPlaylistModule],
     controllers: [PlaylistController],
     providers: [PlaylistService, PlaylistRepository],
     exports: [PlaylistService]

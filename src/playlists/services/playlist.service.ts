@@ -8,6 +8,7 @@ import { UserPlaylistService } from "../../user-playlist/services/user-playlist.
 import { User_Playlist } from "../../user-playlist/user-playlist.model";
 import { Sequelize } from "sequelize-typescript";
 import { PlaylistResponseDto } from "../dtos/PlaylistReponse.dto";
+import { OwnPlaylistDto } from "../dtos/OwnPlaylist.dto";
 
 @Injectable()
 export class PlaylistService {
@@ -54,6 +55,17 @@ export class PlaylistService {
         if(playlists) return { playlists: playlists };
 
         return { playlists: null, message: `No public playlists found`};
+    }
+
+    async getAllOwn(emailOwner: OwnPlaylistDto) : Promise<PlaylistResponseDto> {
+        const user = await this.userService.findByEmail(emailOwner.email)
+        if (!user) return { playlists: null, message: `User does not exist`, error: true }
+        
+        const playlists : Playlist[] =  await this.playlistRepository.getPlayListsByUserId(user.id);
+
+        if(playlists) return { playlists: playlists };
+
+        return { playlists: null, message: `No playlists found from ${emailOwner}`};
     }
 
     private buildNewPlaylist(playlist: CreatePlaylistDto): Playlist {
