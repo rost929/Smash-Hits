@@ -1,7 +1,7 @@
-import { Playlist } from "../models/playlist.model";
+import { Playlist } from '../models/playlist.model';
 
-export class PlaylistResponseDto {        
-    playlist: Playlist
-    message?: string;
-    error?: boolean;
+export class PlaylistResponseDto {
+  playlist: Playlist;
+  message?: string;
+  error?: boolean;
 }

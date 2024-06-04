@@ -5,9 +5,14 @@ import { Transaction } from 'sequelize';
 
 @Injectable()
 export class UserPlaylistRepository {
-    constructor(@InjectModel(User_Playlist) private userPlaylistModel: typeof User_Playlist) { }
+  constructor(
+    @InjectModel(User_Playlist) private userPlaylistModel: typeof User_Playlist,
+  ) {}
 
-    async create(userPlaylist : User_Playlist, transaction: Transaction) : Promise<User_Playlist> {
-        return this.userPlaylistModel.create(userPlaylist, { transaction});
-    }
+  async create(
+    userPlaylist: User_Playlist,
+    transaction: Transaction,
+  ): Promise<User_Playlist> {
+    return this.userPlaylistModel.create(userPlaylist, { transaction });
+  }
 }

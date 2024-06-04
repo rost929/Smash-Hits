@@ -1,4 +1,3 @@
-
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { PlaylistController } from './controllers/playlist.controller';
@@ -10,13 +9,14 @@ import { UserModule } from '../users/user.module';
 import { User } from '../users/models/user.model';
 
 @Module({
-    imports: [
-        SequelizeModule.forFeature([Playlist]), 
-        SequelizeModule.forFeature([User]),
-        UserModule, 
-        UserPlaylistModule],
-    controllers: [PlaylistController],
-    providers: [PlaylistService, PlaylistRepository],
-    exports: [PlaylistService]
+  imports: [
+    SequelizeModule.forFeature([Playlist]),
+    SequelizeModule.forFeature([User]),
+    UserModule,
+    UserPlaylistModule,
+  ],
+  controllers: [PlaylistController],
+  providers: [PlaylistService, PlaylistRepository],
+  exports: [PlaylistService],
 })
-export class PlaylistModule { }
+export class PlaylistModule {}

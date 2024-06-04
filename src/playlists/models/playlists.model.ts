@@ -1,7 +1,6 @@
-import { Playlist } from "./playlist.model";
-
+import { Playlist } from './playlist.model';
 
 export class Playlists {
-    playlists : Playlist[];
-    count: number
+  playlists: Playlist[];
+  count: number;
 }

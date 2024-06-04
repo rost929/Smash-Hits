@@ -8,20 +8,18 @@ import { UsersResponseDto } from '../dtos/UsersResponse.dto';
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))
 export class UserController {
-    constructor(
-        private userService: UserService,
-    ) { }
+  constructor(private userService: UserService) {}
 
-    @Get()
-    async findAllUsers(
-        @Query('page') page: number = 1,
-        @Query('limit') limit: number = 10
-    ): Promise<UsersResponseDto> {
-        return this.userService.findAll(Number(page), Number(limit));
-    }
+  @Get()
+  async findAllUsers(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ): Promise<UsersResponseDto> {
+    return this.userService.findAll(Number(page), Number(limit));
+  }
 
-    @Get('by-email')
-    async findByEmail(@Query('email') email: string): Promise<UserDto> {
-        return this.userService.findByEmail(email);
-    }
+  @Get('by-email')
+  async findByEmail(@Query('email') email: string): Promise<UserDto> {
+    return this.userService.findByEmail(email);
+  }
 }

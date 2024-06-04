@@ -1,9 +1,8 @@
-import { User } from "../models/user.model";
-
+import { User } from '../models/user.model';
 
 export class UsersResponseDto {
-    users: User[];
-    totalItems?: number;
-    totalPages?: number;
-    currentPage?: number; 
+  users: User[];
+  totalItems?: number;
+  totalPages?: number;
+  currentPage?: number;
 }

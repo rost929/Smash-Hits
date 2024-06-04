@@ -1,6 +1,6 @@
-import { User } from "./user.model";
+import { User } from './user.model';
 
 export class Users {
-    users : User[];
-    count: number;
+  users: User[];
+  count: number;
 }
