@@ -1,7 +1,7 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsOptional, IsString } from 'class-validator';
 
 export class ArtistDto {
-    @IsOptional()
-    @IsString()
-    artist: string
+  @IsOptional()
+  @IsString()
+  artist: string;
 }

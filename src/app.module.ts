@@ -25,7 +25,7 @@ import { SongModule } from './songs/song.module';
     PlaylistModule,
     UserPlaylistModule,
     SpotifyModule,
-    SongModule
+    SongModule,
   ],
   controllers: [AppController],
   providers: [AppService],

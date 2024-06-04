@@ -1,15 +1,11 @@
 import { SpotifyApi } from '@spotify/web-api-ts-sdk';
-import { ConfigService } from '@nestjs/config/dist';
 
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
 export class SpotifyProvider {
-
-  constructor(private configService: ConfigService) { }
+  constructor() {}
   getSpotifySdk() {
-    const spotifyConfig = this.configService.get('config').spotify
-    console.log("Spotify Config", spotifyConfig);
-    
-    const sdk = SpotifyApi.withClientCredentials("clientId", "SecretId")
+    const sdk = SpotifyApi.withClientCredentials(clientId, clientSecret);
     return sdk;
-  };
+  }
 }
-

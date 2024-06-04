@@ -4,9 +4,9 @@ import { SongService } from './services/song.service';
 import { SpotifyModule } from 'src/spotify/spotify.module';
 
 @Module({
-    imports: [SpotifyModule],
-    controllers: [SongController],
-    providers: [SongService],
-    exports: [SongService],
+  imports: [SpotifyModule],
+  controllers: [SongController],
+  providers: [SongService],
+  exports: [SongService],
 })
-export class SongModule { }
+export class SongModule {}

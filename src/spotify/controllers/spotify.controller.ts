@@ -6,18 +6,17 @@ import { TrackInfoDto } from 'src/songs/dtos/TrackInfo.dto';
 
 @Controller('spotify')
 export class SpotifyController {
-  constructor(
-      private spotifyService: SpotifyService) {}    
+  constructor(private spotifyService: SpotifyService) {}
 
   @Get('track')
   async getTrack(
     @Query(ValidationPipe) track: TrackDto,
-        @Query(ValidationPipe) artist: ArtistDto
-    ) {
-        const trackData : TrackInfoDto = {
-            track: track.track,
-            artist: artist.artist || null
-        }
+    @Query(ValidationPipe) artist: ArtistDto,
+  ) {
+    const trackData: TrackInfoDto = {
+      track: track.track,
+      artist: artist.artist || null,
+    };
     return await this.spotifyService.searchTrackByName(trackData);
   }
 }
