@@ -3,6 +3,7 @@ import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UserDto } from '../dtos/user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { UsersResponseDto } from '../dtos/UsersResponse.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))
@@ -12,8 +13,11 @@ export class UserController {
     ) { }
 
     @Get()
-    async findAllUsers(): Promise<UserDto[]> {
-        return this.userService.findAll();
+    async findAllUsers(
+        @Query('page') page: number = 1,
+        @Query('limit') limit: number = 10
+    ): Promise<UsersResponseDto> {
+        return this.userService.findAll(Number(page), Number(limit));
     }
 
     @Get('by-email')

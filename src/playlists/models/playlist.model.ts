@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, BelongsToMany } from 'sequelize-typescript';
 import { User } from '../../users/models/user.model';
 import { Song } from '../../songs/song.model';
 import { Playlist_Song } from '../../playlist-song/playlist-song.model';
@@ -10,6 +10,7 @@ export class Playlist extends Model<Playlist> {
     @Column({
         type: DataType.STRING,
         allowNull: false,
+        unique: true
     })
     title: string;
 
