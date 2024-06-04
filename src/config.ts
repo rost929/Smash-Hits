@@ -13,4 +13,8 @@ export default registerAs('config', () => ({
     password: process.env.PGADMIN_DEFAULT_PASSWORD,
   },
   jwtSecret: process.env.JWT_SECRET,
+  spotify: {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET
+  }
 }));
