@@ -3,6 +3,6 @@ export class SongResponseDto {
   album: string;
   artist: string;
   trackId: string;
-  duration: number;
-  releaseDate: string;
+  duration: string;
+  releaseDate: Date;
 }

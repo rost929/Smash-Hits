@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Post,
   Query,
   UseGuards,
   ValidationPipe,
@@ -17,7 +18,7 @@ export class SongController {
   constructor(private spotifyService: SongService) {}
 
   @Get('track')
-  async getTrack(
+  async getSong(
     @Query(ValidationPipe) track: TrackDto,
     @Query(ValidationPipe) artist: ArtistDto,
   ) {
@@ -26,5 +27,17 @@ export class SongController {
       artist: artist.artist || null,
     };
     return await this.spotifyService.searchTrackByName(trackData);
+  }
+
+  @Post('track')
+  async createSong(
+    @Query(ValidationPipe) track: TrackDto,
+    @Query(ValidationPipe) artist: ArtistDto,
+  ) {
+    const trackData: TrackInfoDto = {
+      track: track.track,
+      artist: artist.artist || null,
+    };
+    return await this.spotifyService.createSong(trackData);
   }
 }
