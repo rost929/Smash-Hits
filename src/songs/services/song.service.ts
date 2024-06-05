@@ -2,14 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { SpotifyService } from '../../spotify/services/spotify.service';
 import { TrackInfoDto } from '../dtos/TrackInfo.dto';
 import { SongResponseDto } from '../dtos/SongResponse.dto';
+import { Song } from '../models/song.model';
+import { CreateSongDto } from '../dtos/CreateSong.dto';
+import { PlaylistService } from 'src/playlists/services/playlist.service';
+import { Sequelize } from 'sequelize-typescript';
 import { SongRepository } from '../repository/song.repository';
-import { Song } from '../song.model';
+import { PlaylistSongService } from 'src/playlist-song/services/playlist-song.service';
+import { Playlist_Song } from 'src/playlist-song/models/playlist-song.model';
+import { CreateSongtResponseDto } from '../dtos/CreateSongResponse.dto';
 
 @Injectable()
 export class SongService {
   constructor(
     private spotifyProvider: SpotifyService,
+    private playlistService: PlaylistService,
     private songRepository: SongRepository,
+    private playlistSongService: PlaylistSongService,
+    private readonly sequelize: Sequelize,
   ) {}
 
   async searchTrackByName(trackData: TrackInfoDto): Promise<SongResponseDto> {
@@ -20,19 +29,64 @@ export class SongService {
     return this.buildNewSong(trackInfo);
   }
 
-  async createSong(trackData: TrackInfoDto) {
-    const songInfo: SongResponseDto = await this.searchTrackByName(trackData);
+  async createSong(createSong: CreateSongDto): Promise<CreateSongtResponseDto> {
+    const transaction = await this.sequelize.transaction();
 
-    const { name, artist, album, duration, releaseDate } = songInfo;
-    const newSong = {
-      title: name,
-      artist,
-      album,
-      duration,
-      releaseDate,
-    } as Song;
+    try {
+      const owner = { email: createSong.email };
+      const playlist = { title: createSong.playlist };
 
-    return await this.songRepository.create(newSong);
+      //Validates internally if user and playlist exist and if the user is the playlist owner
+      const foundPlaylist = await this.playlistService.getPlaylistByEmail(
+        owner,
+        playlist,
+      );
+
+      if (!foundPlaylist.playlist) {
+        return {
+          newSong: null,
+          message: foundPlaylist.message,
+          error: foundPlaylist.error,
+        };
+      }
+
+      const songInfo: SongResponseDto =
+        await this.searchTrackByName(createSong);
+      const { name, artist, album, duration, releaseDate } = songInfo;
+      const newSong = {
+        title: name,
+        artist,
+        album,
+        duration,
+        releaseDate,
+      } as Song;
+
+      const songCreated = await this.songRepository.create(
+        newSong,
+        transaction,
+      );
+
+      const newPlaylistSong = {
+        playlistId: foundPlaylist.playlist.id,
+        songId: songCreated.id,
+      } as Playlist_Song;
+
+      await this.playlistSongService.create(newPlaylistSong, transaction);
+
+      await transaction.commit();
+
+      return {
+        newSong: newSong,
+        message: `Song created successfully`,
+      };
+    } catch (error) {
+      await transaction.rollback();
+      return {
+        newSong: null,
+        message: `Error when trying to create a new song`,
+        error: true,
+      };
+    }
   }
 
   private buildNewSong(trackInfo: any): SongResponseDto {

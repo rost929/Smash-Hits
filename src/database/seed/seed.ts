@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../../app.module';
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../../users/models/user.model';
-import { Song } from '../../songs/song.model';
+import { Song } from '../../songs/models/song.model';
 import { Playlist } from '../../playlists/models/playlist.model';
-import { Playlist_Song } from '../../playlist-song/playlist-song.model';
+import { Playlist_Song } from '../../playlist-song/models/playlist-song.model';
 import { User_Playlist } from '../../user-playlist/user-playlist.model';
 import * as bcrypt from 'bcrypt';
 

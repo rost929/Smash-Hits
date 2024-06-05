@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Post,
@@ -13,12 +14,14 @@ import { TrackInfoDto } from '../dtos/TrackInfo.dto';
 import { SongResponseDto } from '../dtos/SongResponse.dto';
 import { AuthGuard } from '@nestjs/passport';
 import {
+  ApiBody,
   ApiHeader,
   ApiOperation,
   ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { CreateSongDto } from '../dtos/CreateSong.dto';
 
 @ApiTags('songs')
 @Controller('songs')
@@ -63,24 +66,13 @@ export class SongController {
     return await this.spotifyService.searchTrackByName(trackData);
   }
 
-  @ApiOperation({ summary: 'Save a new track from spotify API' })
+  @ApiOperation({ summary: 'Create a new track into   an specific playlist' })
   @ApiHeader({
     name: 'Authorization',
     required: true,
     description: 'Example: Bearer access_token',
   })
-  @ApiQuery({
-    name: 'track',
-    required: true,
-    type: 'string',
-    example: 'The unforgiven',
-  })
-  @ApiQuery({
-    name: 'artist',
-    required: false,
-    type: 'string',
-    example: 'Metallica',
-  })
+  @ApiBody({ required: true, type: CreateSongDto })
   @ApiResponse({
     status: 200,
     type: SongResponseDto,
@@ -89,14 +81,7 @@ export class SongController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   @Post('track')
-  async createSong(
-    @Query(ValidationPipe) track: TrackDto,
-    @Query(ValidationPipe) artist: ArtistDto,
-  ) {
-    const trackData: TrackInfoDto = {
-      track: track.track,
-      artist: artist.artist || null,
-    };
-    return await this.spotifyService.createSong(trackData);
+  async createSong(@Body(ValidationPipe) createSongDto: CreateSongDto) {
+    return await this.spotifyService.createSong(createSongDto);
   }
 }

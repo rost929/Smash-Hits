@@ -9,6 +9,7 @@ import { PlaylistModule } from './playlists/playlist.module';
 import { UserPlaylistModule } from './user-playlist/user-playlist.module';
 import { SpotifyModule } from './spotify/spotify.module';
 import { SongModule } from './songs/song.module';
+import { PlaylistSongModule } from './playlist-song/playlist-song.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +25,7 @@ import { SongModule } from './songs/song.module';
     UserPlaylistModule,
     SpotifyModule,
     SongModule,
+    PlaylistSongModule,
   ],
 })
 export class AppModule {}

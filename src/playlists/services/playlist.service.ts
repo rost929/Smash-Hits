@@ -145,6 +145,7 @@ export class PlaylistService {
       return {
         playlist: null,
         message: `No ${playlist.title} playlist found for ${owner.email} `,
+        error: true,
       };
     }
 
@@ -183,7 +184,7 @@ export class PlaylistService {
     } as PlaylistResponseDto;
   }
 
-  private async validateIfPlaylistExistAlready(title: string, userId: number) {
+  async validateIfPlaylistExistAlready(title: string, userId: number) {
     const playListFound: Playlist =
       await this.playlistRepository.getPlaylistByTitle(title, userId);
 

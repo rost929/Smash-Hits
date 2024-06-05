@@ -1,14 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Song } from '../models/song.model';
 
-export class loginResponseDto {
+export class CreateSongtResponseDto {
   @ApiProperty()
-  email: string;
-
-  @ApiProperty()
-  access_token?: string;
-
-  @ApiProperty()
-  validCredentials!: boolean;
+  newSong: Song;
 
   @ApiProperty()
   message?: string;

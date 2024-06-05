@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { RegistrationService } from '../services/registration.service';
 import { SignUpDto } from '../dtos/signup.dto';
-import { SignUpResponseDto } from "../dtos/signupResponse.dto";
+import { SignUpResponseDto } from '../dtos/signupResponse.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 @ApiTags('sign-up')
 @Controller('sign-up')

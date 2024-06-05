@@ -4,10 +4,17 @@ import { SongService } from './services/song.service';
 import { SpotifyModule } from 'src/spotify/spotify.module';
 import { SongRepository } from './repository/song.repository';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Song } from './song.model';
+import { Song } from './models/song.model';
+import { PlaylistSongModule } from 'src/playlist-song/playlist-song.module';
+import { PlaylistModule } from 'src/playlists/playlist.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Song]), SpotifyModule],
+  imports: [
+    SequelizeModule.forFeature([Song]),
+    SpotifyModule,
+    PlaylistModule,
+    PlaylistSongModule,
+  ],
   controllers: [SongController],
   providers: [SongService, SongRepository],
   exports: [SongService],
