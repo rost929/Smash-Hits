@@ -7,6 +7,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
 import { UserDto } from 'src/users/dtos/user.dto';
 import { PlaylistDto } from 'src/playlists/dtos/Playlist.dto';
+import Transaction from 'sequelize/types/transaction';
 
 describe('PlaylistService', () => {
   let service: PlaylistService;
@@ -153,7 +154,9 @@ describe('PlaylistService', () => {
       } as UserDto;
 
       jest.spyOn(userService, 'findByEmail').mockResolvedValue(user);
-      jest.spyOn(service, 'validateIfPlaylistExistAlready').mockResolvedValue(true);
+      jest
+        .spyOn(service, 'validateIfPlaylistExistAlready')
+        .mockResolvedValue(true);
 
       const result = await service.create(createPlaylistDto);
 
@@ -163,7 +166,10 @@ describe('PlaylistService', () => {
         error: undefined,
       });
       expect(userService.findByEmail).toHaveBeenCalledWith('test@example.com');
-      expect(service.validateIfPlaylistExistAlready).toHaveBeenCalledWith('Test Playlist', 1);
+      expect(service.validateIfPlaylistExistAlready).toHaveBeenCalledWith(
+        'Test Playlist',
+        1,
+      );
     });
 
     it('should return an error if there is an exception during playlist creation', async () => {
@@ -181,9 +187,13 @@ describe('PlaylistService', () => {
       } as UserDto;
 
       jest.spyOn(userService, 'findByEmail').mockResolvedValue(user);
-      jest.spyOn(service, 'validateIfPlaylistExistAlready').mockResolvedValue(false);
+      jest
+        .spyOn(service, 'validateIfPlaylistExistAlready')
+        .mockResolvedValue(false);
       jest.spyOn(service, 'buildNewPlaylist').mockReturnValue({} as any);
-      jest.spyOn(playlistRepository, 'create').mockRejectedValue(new Error('Create error'));
+      jest
+        .spyOn(playlistRepository, 'create')
+        .mockRejectedValue(new Error('Create error'));
 
       const result = await service.create(createPlaylistDto);
 
@@ -193,8 +203,14 @@ describe('PlaylistService', () => {
         error: true,
       });
       expect(userService.findByEmail).toHaveBeenCalledWith('test@example.com');
-      expect(service.validateIfPlaylistExistAlready).toHaveBeenCalledWith('Test Playlist', 1);
-      expect(playlistRepository.create).toHaveBeenCalledWith({}, expect.anything());
+      expect(service.validateIfPlaylistExistAlready).toHaveBeenCalledWith(
+        'Test Playlist',
+        1,
+      );
+      expect(playlistRepository.create).toHaveBeenCalledWith(
+        {},
+        expect.anything(),
+      );
     });
 
     it('should return an error if there is an exception during user-playlist creation', async () => {
@@ -217,13 +233,27 @@ describe('PlaylistService', () => {
         isPublic: false,
       } as PlaylistDto;
       const newUserPlaylist = { userId: 1, playlistId: 1 };
-      
+
+      const transaction = {
+        commit: jest.fn(),
+        rollback: jest.fn(),
+      };
+
+      jest
+        .spyOn(sequelize, 'transaction')
+        .mockResolvedValue(transaction as unknown as Transaction);
       jest.spyOn(userService, 'findByEmail').mockResolvedValue(user);
-      jest.spyOn(service, 'validateIfPlaylistExistAlready').mockResolvedValue(false);
+      jest
+        .spyOn(service, 'validateIfPlaylistExistAlready')
+        .mockResolvedValue(false);
       jest.spyOn(service, 'buildNewPlaylist').mockReturnValue(newPlaylist);
       jest.spyOn(playlistRepository, 'create').mockResolvedValue(newPlaylist);
-      jest.spyOn(service, 'buildNewUserPlaylist').mockReturnValue(newUserPlaylist);
-      jest.spyOn(userPlaylistService, 'create').mockRejectedValue(new Error('User-Playlist create error'));
+      jest
+        .spyOn(service, 'buildNewUserPlaylist')
+        .mockReturnValue(newUserPlaylist);
+      jest
+        .spyOn(userPlaylistService, 'create')
+        .mockRejectedValue(new Error('User-Playlist create error'));
 
       const result = await service.create(createPlaylistDto);
 
@@ -233,11 +263,22 @@ describe('PlaylistService', () => {
         error: true,
       });
       expect(userService.findByEmail).toHaveBeenCalledWith('test@example.com');
-      expect(service.validateIfPlaylistExistAlready).toHaveBeenCalledWith('Test Playlist', 1);
+      expect(service.validateIfPlaylistExistAlready).toHaveBeenCalledWith(
+        'Test Playlist',
+        1,
+      );
       expect(service.buildNewPlaylist).toHaveBeenCalledWith(createPlaylistDto);
-      expect(playlistRepository.create).toHaveBeenCalledWith(newPlaylist, expect.anything());
+      expect(playlistRepository.create).toHaveBeenCalledWith(
+        newPlaylist,
+        expect.anything(),
+      );
       expect(service.buildNewUserPlaylist).toHaveBeenCalledWith(1, 1);
-      expect(userPlaylistService.create).toHaveBeenCalledWith(newUserPlaylist, expect.anything());
+      expect(userPlaylistService.create).toHaveBeenCalledWith(
+        newUserPlaylist,
+        expect.anything(),
+      );
+      expect(transaction.rollback).toHaveBeenCalled();
+      expect(transaction.commit).not.toHaveBeenCalled();
     });
   });
 });
