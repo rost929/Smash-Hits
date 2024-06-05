@@ -1,9 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
-
 export class PlaylistDto {
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
+  id: number;
   title: string;
+  description: string;
+  isPublic: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

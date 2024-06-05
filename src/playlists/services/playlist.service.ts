@@ -5,14 +5,15 @@ import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
 import { Playlist } from '../models/playlist.model';
 import { CreatePlaylistResponseDto } from '../dtos/CreatePlaylistResponse.dto';
 import { UserPlaylistService } from '../../user-playlist/services/user-playlist.service';
-import { User_Playlist } from '../../user-playlist/user-playlist.model';
 import { Sequelize } from 'sequelize-typescript';
 import { PlaylistsResponseDto } from '../dtos/PlaylistsReponse.dto';
 import { OwnerDto } from '../dtos/Owner.dto';
-import { PlaylistDto } from '../dtos/Playlist.dto';
+import { TitleDto } from '../dtos/Title.dto';
 import { PlaylistResponseDto } from '../dtos/PlaylistResponse.dto';
 import { UpdatePlaylistDto } from '../dtos/UpdatePlaylistDto';
 import { Playlists } from '../models/playlists.model';
+import { PlaylistDto } from '../dtos/Playlist.dto';
+import { UserPlaylistDto } from 'src/user-playlist/dtos/user-playlist.dto';
 
 @Injectable()
 export class PlaylistService {
@@ -47,13 +48,14 @@ export class PlaylistService {
         };
       }
 
-      const newPlaylist: Playlist = this.buildNewPlaylist(playlist);
-      const createdPlaylist = await this.playlistRepository.create(
+      const newPlaylist: PlaylistDto = this.buildNewPlaylist(playlist);
+
+      const createdPlaylist: PlaylistDto = await this.playlistRepository.create(
         newPlaylist,
         transaction,
       );
 
-      const newUserPlaylist = this.buildNewUserPlaylist(
+      const newUserPlaylist: UserPlaylistDto = this.buildNewUserPlaylist(
         user.id,
         createdPlaylist.id,
       );
@@ -133,7 +135,7 @@ export class PlaylistService {
 
   async getPlaylistByEmail(
     owner: OwnerDto,
-    playlist: PlaylistDto,
+    playlist: TitleDto,
   ): Promise<PlaylistResponseDto> {
     const user = await this.userService.findByEmail(owner.email);
     if (!user)
@@ -158,7 +160,7 @@ export class PlaylistService {
     const { email, title } = updatePlaylistDto;
 
     const owner = { email } as OwnerDto;
-    const playlist = { title } as PlaylistDto;
+    const playlist = { title } as TitleDto;
 
     const foundPlaylist: PlaylistResponseDto = await this.getPlaylistByEmail(
       owner,
@@ -166,13 +168,13 @@ export class PlaylistService {
     );
     if (!foundPlaylist.playlist) return foundPlaylist;
 
-    const playlistToUpdate: Playlist = this.buildNewPlaylistUpdated(
+    const playlistToUpdate: PlaylistDto = this.buildNewPlaylistUpdated(
       updatePlaylistDto,
       foundPlaylist.playlist.id,
     );
     await this.playlistRepository.update(playlistToUpdate);
 
-    const updatedPlayList = { title: playlistToUpdate.title } as PlaylistDto;
+    const updatedPlayList = { title: playlistToUpdate.title } as TitleDto;
     const playlisUpdated: PlaylistResponseDto = await this.getPlaylistByEmail(
       owner,
       updatedPlayList,
@@ -184,40 +186,39 @@ export class PlaylistService {
     } as PlaylistResponseDto;
   }
 
-  async validateIfPlaylistExistAlready(title: string, userId: number) {
-    const playListFound: Playlist =
+  async validateIfPlaylistExistAlready(
+    title: string,
+    userId: number,
+  ): Promise<boolean> {
+    const playlistFound: Playlist =
       await this.playlistRepository.getPlaylistByTitle(title, userId);
-
-    return playListFound && playListFound.title === title ? true : false;
+    return playlistFound && playlistFound.title === title ? true : false;
   }
 
-  private buildNewPlaylist(playlist: CreatePlaylistDto): Playlist {
+  buildNewPlaylist(playlist: CreatePlaylistDto): PlaylistDto {
     return {
       title: playlist.title,
       description: playlist.title || null,
       isPublic: playlist.isPublic,
-    } as Playlist;
+    } as PlaylistDto;
   }
 
-  private buildNewPlaylistUpdated(
+  buildNewPlaylistUpdated(
     playlist: UpdatePlaylistDto,
     id: number,
-  ): Playlist {
+  ): PlaylistDto {
     return {
       id: id,
       title: playlist.newTitle || playlist.title,
       description: playlist.description || null,
       isPublic: playlist.isPublic,
-    } as Playlist;
+    } as PlaylistDto;
   }
 
-  private buildNewUserPlaylist(
-    userId: number,
-    playlistId: number,
-  ): User_Playlist {
+  buildNewUserPlaylist(userId: number, playlistId: number): UserPlaylistDto {
     return {
       userId: userId,
       playlistId: playlistId,
-    } as User_Playlist;
+    } as UserPlaylistDto;
   }
 }

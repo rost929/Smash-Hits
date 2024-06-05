@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Playlist } from '../models/playlist.model';
+import { PlaylistDto } from './Playlist.dto';
 
 export class CreatePlaylistResponseDto {
   @ApiProperty()
-  newPlaylist: Playlist;
+  newPlaylist: PlaylistDto;
 
   @ApiProperty()
   message?: string;

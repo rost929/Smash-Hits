@@ -14,7 +14,7 @@ import { CreatePlaylistResponseDto } from '../dtos/CreatePlaylistResponse.dto';
 import { PlaylistsResponseDto } from '../dtos/PlaylistsReponse.dto';
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
 import { OwnerDto } from '../dtos/Owner.dto';
-import { PlaylistDto } from '../dtos/Playlist.dto';
+import { TitleDto } from '../dtos/Title.dto';
 import { PlaylistResponseDto } from '../dtos/PlaylistResponse.dto';
 import { UpdatePlaylistDto } from '../dtos/UpdatePlaylistDto';
 import {
@@ -118,7 +118,7 @@ export class PlaylistController {
   @Get('one/by-email')
   async findPlaylistByEmail(
     @Query(ValidationPipe) ownerEmail: OwnerDto,
-    @Query(ValidationPipe) title: PlaylistDto,
+    @Query(ValidationPipe) title: TitleDto,
   ): Promise<PlaylistResponseDto> {
     return await this.playlistService.getPlaylistByEmail(ownerEmail, title);
   }

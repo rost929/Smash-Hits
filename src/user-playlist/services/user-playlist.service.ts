@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserPlaylistRepository } from '../repository/user-playlist.repository';
-import { User_Playlist } from '../user-playlist.model';
 import { Transaction } from 'sequelize';
+import { UserPlaylistDto } from '../dtos/user-playlist.dto';
 
 @Injectable()
 export class UserPlaylistService {
@@ -10,9 +10,9 @@ export class UserPlaylistService {
   ) {}
 
   async create(
-    userPlaylist: User_Playlist,
+    userPlaylist: UserPlaylistDto,
     transaction: Transaction,
-  ): Promise<User_Playlist> {
+  ): Promise<UserPlaylistDto> {
     return await this.userPlaylistRepository.create(userPlaylist, transaction);
   }
 }

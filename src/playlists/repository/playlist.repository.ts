@@ -4,6 +4,7 @@ import { Playlist } from '../models/playlist.model';
 import { User } from '../../users/models/user.model';
 import { Transaction } from 'sequelize';
 import { Playlists } from '../models/playlists.model';
+import { PlaylistDto } from '../dtos/Playlist.dto';
 
 @Injectable()
 export class PlaylistRepository {
@@ -13,10 +14,13 @@ export class PlaylistRepository {
   ) {}
 
   async create(
-    playlist: Playlist,
+    playlist: PlaylistDto,
     transaction: Transaction,
-  ): Promise<Playlist> {
-    return await this.playlistModel.create(playlist, { transaction });
+  ): Promise<PlaylistDto> {
+    const createdPlaylist = (
+      await this.playlistModel.create(playlist, { transaction })
+    ).get();
+    return createdPlaylist as PlaylistDto;
   }
 
   async getAllPublicPlaylists(
@@ -62,7 +66,7 @@ export class PlaylistRepository {
     return user.playlists;
   }
 
-  async update(playlist: Playlist): Promise<void> {
+  async update(playlist: PlaylistDto): Promise<void> {
     await this.playlistModel.update(playlist, {
       where: { id: playlist.id },
       returning: true,
