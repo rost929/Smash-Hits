@@ -5,8 +5,8 @@ import { UserPlaylistService } from '../../user-playlist/services/user-playlist.
 import { PlaylistRepository } from '../repository/playlist.repository';
 import { Sequelize } from 'sequelize-typescript';
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
-import { UserDto } from 'src/users/dtos/user.dto';
-import { PlaylistDto } from 'src/playlists/dtos/Playlist.dto';
+import { UserDto } from '../../users/dtos/user.dto';
+import { PlaylistDto } from '../../playlists/dtos/Playlist.dto';
 import Transaction from 'sequelize/types/transaction';
 
 describe('PlaylistService', () => {

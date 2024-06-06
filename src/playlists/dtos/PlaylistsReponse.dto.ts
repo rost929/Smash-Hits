@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Playlist } from '../models/playlist.model';
-import { UserDto } from 'src/users/dtos/user.dto';
+import { UserDto } from '../../users/dtos/user.dto';
 
 export class PlaylistsResponseDto {
   @ApiProperty()

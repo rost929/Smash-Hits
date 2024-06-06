@@ -13,7 +13,7 @@ import { PlaylistResponseDto } from '../dtos/PlaylistResponse.dto';
 import { UpdatePlaylistDto } from '../dtos/UpdatePlaylistDto';
 import { Playlists } from '../models/playlists.model';
 import { PlaylistDto } from '../dtos/Playlist.dto';
-import { UserPlaylistDto } from 'src/user-playlist/dtos/user-playlist.dto';
+import { UserPlaylistDto } from '../../user-playlist/dtos/user-playlist.dto';
 
 @Injectable()
 export class PlaylistService {

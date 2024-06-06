@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SpotifyProvider } from '../providers/spotify.provider';
-import { TrackInfoDto } from 'src/songs/dtos/TrackInfo.dto';
+import { TrackInfoDto } from '../../songs/dtos/TrackInfo.dto';
 
 @Injectable()
 export class SpotifyService {

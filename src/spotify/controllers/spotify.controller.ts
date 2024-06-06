@@ -1,10 +1,10 @@
 import { Controller, Get, Query, ValidationPipe } from '@nestjs/common';
 import { SpotifyService } from '../services/spotify.service';
-import { TrackDto } from 'src/songs/dtos/Track.dto';
-import { ArtistDto } from 'src/songs/dtos/Artist.dto';
-import { TrackInfoDto } from 'src/songs/dtos/TrackInfo.dto';
+import { TrackDto } from '../../songs/dtos/Track.dto';
+import { ArtistDto } from '../../songs/dtos/Artist.dto';
+import { TrackInfoDto } from '../../songs/dtos/TrackInfo.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SongResponseDto } from 'src/songs/dtos/SongResponse.dto';
+import { SongResponseDto } from '../../songs/dtos/SongResponse.dto';
 
 @Controller('spotify')
 export class SpotifyController {

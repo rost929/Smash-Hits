@@ -44,7 +44,7 @@ $ npm install
 2.**Configure env variables**:
 In the file 'env.sample' are the local environment variables of the whole project, rename to '.env'.
 
-3.***Database configuration**:
+3.**Database configuration**:
 - The database was implemented in a Postgresql database engine, which is configured in a docker container, as well as the pgadmin service to interact with the database. 
 
 Installing docker is a prerequisite to build the database.
@@ -52,7 +52,7 @@ For more information refer to: [Docker Installation](https://www.docker.com/prod
 
 Once docker is installed, from the root of the project run:
 ```bash
-Docker-compose up -d 
+docker-compose up -d 
 ```
 The above command will raise the postgresql service, the pgadmin service and the necessary volume that will host the database.
 
@@ -68,7 +68,7 @@ $ npm run start:dev
 
 ## Database Population 
 - In order to feed the database with some initial data, a seed file was created, which will fill the database with 
-initial data, to run the seed file run:
+initial data, to run the seed run in another terminal:
 
 ```bash
   npm run seed
@@ -77,7 +77,7 @@ initial data, to run the seed file run:
 ## PgAdmin configuration
 If you want to view the structure and data in database, you can connect to PgAdmin as follows:
 
-Go to the browser with the path: localhost:8080/ (Project must be up and running)
+Go to the browser with the path: http://localhost:8080/ (Project must be up and running)
 
 *Credentials*: 
 - email: admin@postgres.com

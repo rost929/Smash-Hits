@@ -1,4 +1,3 @@
-// src/modules/user/controllers/user.controller.ts
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UserDto } from '../dtos/user.dto';

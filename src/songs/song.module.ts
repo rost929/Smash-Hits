@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { SongController } from './controllers/song.controller';
 import { SongService } from './services/song.service';
-import { SpotifyModule } from 'src/spotify/spotify.module';
+import { SpotifyModule } from '../spotify/spotify.module';
 import { SongRepository } from './repository/song.repository';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Song } from './models/song.model';
-import { PlaylistSongModule } from 'src/playlist-song/playlist-song.module';
-import { PlaylistModule } from 'src/playlists/playlist.module';
+import { PlaylistSongModule } from '../playlist-song/playlist-song.module';
+import { PlaylistModule } from '../playlists/playlist.module';
 
 @Module({
   imports: [

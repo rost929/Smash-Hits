@@ -4,11 +4,11 @@ import { TrackInfoDto } from '../dtos/TrackInfo.dto';
 import { SongResponseDto } from '../dtos/SongResponse.dto';
 import { Song } from '../models/song.model';
 import { CreateSongDto } from '../dtos/CreateSong.dto';
-import { PlaylistService } from 'src/playlists/services/playlist.service';
+import { PlaylistService } from '../../playlists/services/playlist.service';
 import { Sequelize } from 'sequelize-typescript';
 import { SongRepository } from '../repository/song.repository';
-import { PlaylistSongService } from 'src/playlist-song/services/playlist-song.service';
-import { Playlist_Song } from 'src/playlist-song/models/playlist-song.model';
+import { PlaylistSongService } from '../../playlist-song/services/playlist-song.service';
+import { Playlist_Song } from '../../playlist-song/models/playlist-song.model';
 import { CreateSongtResponseDto } from '../dtos/CreateSongResponse.dto';
 
 @Injectable()

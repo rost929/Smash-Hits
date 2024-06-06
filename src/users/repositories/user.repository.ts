@@ -24,8 +24,6 @@ export class UserRepository {
   }
 
   async create(user: User): Promise<User> {
-    console.log('USER ···· ', user);
-
     return this.userModel.create(user);
   }
 }
