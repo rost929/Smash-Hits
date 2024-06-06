@@ -15,7 +15,6 @@ export class Playlist extends Model<Playlist> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true,
   })
   title: string;
 

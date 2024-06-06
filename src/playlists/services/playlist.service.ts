@@ -127,6 +127,7 @@ export class PlaylistService {
 
     return {
       playlists,
+      userOwner: user,
       totalItems: playlists.length,
       totalPages,
       currentPage,

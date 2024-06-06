@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Playlist } from '../models/playlist.model';
+import { UserDto } from 'src/users/dtos/user.dto';
 
 export class PlaylistsResponseDto {
   @ApiProperty()
@@ -19,4 +20,7 @@ export class PlaylistsResponseDto {
 
   @ApiProperty()
   currentPage?: number;
+
+  @ApiProperty()
+  userOwner?: UserDto;
 }

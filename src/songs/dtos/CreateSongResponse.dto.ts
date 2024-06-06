@@ -6,6 +6,12 @@ export class CreateSongtResponseDto {
   newSong: Song;
 
   @ApiProperty()
+  playlist?: string;
+
+  @ApiProperty()
+  emailOwner?: string;
+
+  @ApiProperty()
   message?: string;
 
   @ApiProperty()

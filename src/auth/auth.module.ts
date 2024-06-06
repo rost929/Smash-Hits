@@ -16,7 +16,7 @@ import { UserModule } from '../users/user.module';
       useFactory: async () => {
         return {
           secret: 'ultraSecret1234',
-          signOptions: { expiresIn: '20m' },
+          signOptions: { expiresIn: '1h' },
         };
       },
     }),

@@ -77,6 +77,8 @@ export class SongService {
 
       return {
         newSong: newSong,
+        playlist: playlist.title,
+        emailOwner: owner.email,
         message: `Song created successfully`,
       };
     } catch (error) {

@@ -159,7 +159,7 @@ export class PlaylistController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   @Put()
-  async updateUserEmail(
+  async update(
     @Body(ValidationPipe) updatePlaylistDto: UpdatePlaylistDto,
   ) {
     return await this.playlistService.update(updatePlaylistDto);
