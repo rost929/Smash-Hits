@@ -119,6 +119,11 @@ The tests cases implemented are related to playlists creation process
 ### API Documentation
 - to visualize smash-hits Api documentation, go in the browser to: [swagger-documentation](http://localhost:3000/api-docs#/) **Note**: The app needs to be app and running
 
+### Insomia API Collection
+- There is an Api collection of each service with examples exported from [Insomia](https://insomnia.rest/download), it can be found on the smash-hits-collection.json, This file can be imported from other tools like Postman, but for its optimum configuration, it is recommended to be imported from Insomia.
+
+  - [smash-hits-collection](./api-colection/smash-hits-collection.json)
+
 #### Final Notes:
   Some of the important dependencies used:
 
@@ -141,4 +146,4 @@ The tests cases implemented are related to playlists creation process
 - Mail - juanpablovd97@hotmail.com
 
 ## License
-[MIT licensed](LICENSE).
+MIT licensed
