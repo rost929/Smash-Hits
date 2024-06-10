@@ -1,4 +1,4 @@
-export class PlaylistDto {
+export class Playlist {
   id?: number;
   title: string;
   description: string;

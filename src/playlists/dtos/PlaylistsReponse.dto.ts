@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Playlist } from '../models/playlist.model';
+import { Playlist } from '../models/business/playlist.model';
 import { UserDto } from '../../users/dtos/user.dto';
 
 export class PlaylistsResponseDto {

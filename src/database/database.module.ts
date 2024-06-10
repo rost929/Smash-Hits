@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from '../users/models/user.model';
-import { Song } from '../songs/models/song.model';
-import { Playlist } from '../playlists/models/playlist.model';
-import { Playlist_Song } from '../playlist-song/models/playlist-song.model';
-import { User_Playlist } from '../user-playlist/user-playlist.model';
+import { User } from '../users/models/database/user.model';
+import { Song } from '../songs/models/database/song.model';
+import { Playlist } from '../playlists/models/database/playlist.model';
+import { Playlist_Song } from '../playlist-song/models/database/PlaylistSong.model';
+import { User_Playlist } from '../user-playlist/models/database/UserPlaylist.model';
 @Module({
   imports: [
     ConfigModule.forRoot(),

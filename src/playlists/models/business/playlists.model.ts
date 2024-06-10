@@ -1,4 +1,4 @@
-import { Playlist } from './playlist.model';
+import { Playlist } from '../business/playlist.model';
 
 export class Playlists {
   playlists: Playlist[];

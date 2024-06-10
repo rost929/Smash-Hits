@@ -22,6 +22,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CreateSongDto } from '../dtos/CreateSong.dto';
+import { CreateSongtResponseDto } from '../dtos/CreateSongResponse.dto';
 
 @ApiTags('songs')
 @Controller('songs')
@@ -58,7 +59,7 @@ export class SongController {
   async getSong(
     @Query(ValidationPipe) track: TrackDto,
     @Query(ValidationPipe) artist: ArtistDto,
-  ) {
+  ): Promise<SongResponseDto> {
     const trackData: TrackInfoDto = {
       track: track.track,
       artist: artist.artist || null,
@@ -75,13 +76,15 @@ export class SongController {
   @ApiBody({ required: true, type: CreateSongDto })
   @ApiResponse({
     status: 200,
-    type: SongResponseDto,
+    type: CreateSongtResponseDto,
   })
   @ApiResponse({ status: 400, description: 'Bad request.' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   @Post('track')
-  async createSong(@Body(ValidationPipe) createSongDto: CreateSongDto) {
+  async createSong(
+    @Body(ValidationPipe) createSongDto: CreateSongDto,
+  ): Promise<CreateSongtResponseDto> {
     return await this.spotifyService.createSong(createSongDto);
   }
 }

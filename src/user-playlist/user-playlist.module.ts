@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User_Playlist } from './user-playlist.model';
+import { User_Playlist } from './models/database/UserPlaylist.model';
 import { UserPlaylistService } from './services/user-playlist.service';
 import { UserPlaylistRepository } from './repository/user-playlist.repository';
 

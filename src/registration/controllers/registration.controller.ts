@@ -28,7 +28,7 @@ export class RegistrationController {
   async singUp(
     @Body(new ValidationPipe()) newUser: SignUpDto,
     @Response() res,
-  ) {
+  ): Promise<SignUpResponseDto> {
     const signUpResponse = await this.registrationService.signUp(newUser);
 
     if (signUpResponse.userExistsPreviously === true) {

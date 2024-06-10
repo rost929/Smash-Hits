@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
 import { UserDto } from '../dtos/user.dto';
-import { User } from '../models/user.model';
+import { User } from '../models/database/user.model';
 import * as bcrypt from 'bcrypt';
 import { UsersResponseDto } from '../dtos/UsersResponse.dto';
 

@@ -5,8 +5,8 @@ import {
   DataType,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { Playlist } from '../../playlists/models/playlist.model';
-import { Playlist_Song } from '../../playlist-song/models/playlist-song.model';
+import { Playlist } from '../../../playlists/models/database/playlist.model';
+import { Playlist_Song } from '../../../playlist-song/models/database/PlaylistSong.model';
 
 @Table
 export class Song extends Model<Song> {

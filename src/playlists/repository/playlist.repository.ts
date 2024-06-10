@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Playlist } from '../models/playlist.model';
-import { User } from '../../users/models/user.model';
+import { Playlist as PlaylistDbModel } from '../models/database/playlist.model';
+import { User } from '../../users/models/database/user.model';
 import { Transaction } from 'sequelize';
-import { Playlists } from '../models/playlists.model';
-import { PlaylistDto } from '../dtos/Playlist.dto';
+import { Playlist } from '../models/business/playlist.model';
+import { Playlists } from '../models/business/playlists.model';
 
 @Injectable()
 export class PlaylistRepository {
   constructor(
-    @InjectModel(Playlist) private playlistModel: typeof Playlist,
+    @InjectModel(PlaylistDbModel) private playlistModel: typeof PlaylistDbModel,
     @InjectModel(User) private userModel: typeof User,
   ) {}
 
   async create(
-    playlist: PlaylistDto,
+    playlist: Playlist,
     transaction: Transaction,
-  ): Promise<PlaylistDto> {
+  ): Promise<Playlist> {
     const createdPlaylist = (
       await this.playlistModel.create(playlist, { transaction })
     ).get();
-    return createdPlaylist as PlaylistDto;
+    return createdPlaylist as Playlist;
   }
 
   async getAllPublicPlaylists(
@@ -32,11 +32,11 @@ export class PlaylistRepository {
       offset,
       limit,
     });
-    return { playlists: rows, count };
+    return { playlists: rows, count } as Playlists;
   }
 
   async getPlaylistByTitle(title: string, userId: number): Promise<Playlist> {
-    return this.playlistModel.findOne({
+    const playlist = await this.playlistModel.findOne({
       where: { title },
       include: [
         {
@@ -46,6 +46,7 @@ export class PlaylistRepository {
         },
       ],
     });
+    return playlist as Playlist;
   }
 
   async getPlaylistsByUserId(
@@ -56,17 +57,17 @@ export class PlaylistRepository {
     const user = await this.userModel.findByPk(userId, {
       include: [
         {
-          model: Playlist,
+          model: PlaylistDbModel,
           through: { attributes: [] },
         },
       ],
       limit,
       offset,
     });
-    return user.playlists;
+    return user.playlists as Playlist[];
   }
 
-  async update(playlist: PlaylistDto): Promise<void> {
+  async update(playlist: Playlist): Promise<void> {
     await this.playlistModel.update(playlist, {
       where: { id: playlist.id },
       returning: true,

@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { SpotifyService } from '../../spotify/services/spotify.service';
 import { TrackInfoDto } from '../dtos/TrackInfo.dto';
 import { SongResponseDto } from '../dtos/SongResponse.dto';
-import { Song } from '../models/song.model';
+import { Song } from '../models/database/song.model';
 import { CreateSongDto } from '../dtos/CreateSong.dto';
 import { PlaylistService } from '../../playlists/services/playlist.service';
 import { Sequelize } from 'sequelize-typescript';
 import { SongRepository } from '../repository/song.repository';
 import { PlaylistSongService } from '../../playlist-song/services/playlist-song.service';
-import { Playlist_Song } from '../../playlist-song/models/playlist-song.model';
+import { Playlist_Song } from '../../playlist-song/models/database/PlaylistSong.model';
 import { CreateSongtResponseDto } from '../dtos/CreateSongResponse.dto';
 
 @Injectable()

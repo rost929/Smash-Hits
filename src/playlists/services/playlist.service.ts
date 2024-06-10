@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PlaylistRepository } from '../repository/playlist.repository';
 import { UserService } from '../../users/services/user.service';
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
-import { Playlist } from '../models/playlist.model';
+import { Playlist } from '../models/business/playlist.model';
 import { CreatePlaylistResponseDto } from '../dtos/CreatePlaylistResponse.dto';
 import { UserPlaylistService } from '../../user-playlist/services/user-playlist.service';
 import { Sequelize } from 'sequelize-typescript';
@@ -11,9 +11,10 @@ import { OwnerDto } from '../dtos/Owner.dto';
 import { TitleDto } from '../dtos/Title.dto';
 import { PlaylistResponseDto } from '../dtos/PlaylistResponse.dto';
 import { UpdatePlaylistDto } from '../dtos/UpdatePlaylistDto';
-import { Playlists } from '../models/playlists.model';
+import { Playlists } from '../models/business/playlists.model';
 import { PlaylistDto } from '../dtos/Playlist.dto';
 import { UserPlaylistDto } from '../../user-playlist/dtos/user-playlist.dto';
+import { UserPlaylist } from 'src/user-playlist/models/business/UserPlaylist.model';
 
 @Injectable()
 export class PlaylistService {
@@ -48,9 +49,9 @@ export class PlaylistService {
         };
       }
 
-      const newPlaylist: PlaylistDto = this.buildNewPlaylist(playlist);
+      const newPlaylist: Playlist = this.buildNewPlaylist(playlist);
 
-      const createdPlaylist: PlaylistDto = await this.playlistRepository.create(
+      const createdPlaylist: Playlist = await this.playlistRepository.create(
         newPlaylist,
         transaction,
       );
@@ -152,7 +153,7 @@ export class PlaylistService {
       };
     }
 
-    return { playlist: foundPlaylist };
+    return { playlist: foundPlaylist } as PlaylistResponseDto;
   }
 
   async update(
@@ -196,30 +197,27 @@ export class PlaylistService {
     return playlistFound && playlistFound.title === title ? true : false;
   }
 
-  buildNewPlaylist(playlist: CreatePlaylistDto): PlaylistDto {
+  buildNewPlaylist(playlist: CreatePlaylistDto): Playlist {
     return {
       title: playlist.title,
       description: playlist.title || null,
       isPublic: playlist.isPublic,
-    } as PlaylistDto;
+    } as Playlist;
   }
 
-  buildNewPlaylistUpdated(
-    playlist: UpdatePlaylistDto,
-    id: number,
-  ): PlaylistDto {
+  buildNewPlaylistUpdated(playlist: UpdatePlaylistDto, id: number): Playlist {
     return {
       id: id,
       title: playlist.newTitle || playlist.title,
       description: playlist.description || null,
       isPublic: playlist.isPublic,
-    } as PlaylistDto;
+    } as Playlist;
   }
 
-  buildNewUserPlaylist(userId: number, playlistId: number): UserPlaylistDto {
+  buildNewUserPlaylist(userId: number, playlistId: number): UserPlaylist {
     return {
       userId: userId,
       playlistId: playlistId,
-    } as UserPlaylistDto;
+    } as UserPlaylist;
   }
 }
