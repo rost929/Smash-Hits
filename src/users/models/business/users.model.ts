@@ -1,4 +1,4 @@
-import { User } from '../business/user.model';
+import { User } from './User.model';
 
 export class Users {
   users: User[];

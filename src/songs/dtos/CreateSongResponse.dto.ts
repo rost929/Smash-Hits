@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Song } from '../models/database/song.model';
+import { Song } from '../models/database/Song.model';
 
 export class CreateSongtResponseDto {
   @ApiProperty()

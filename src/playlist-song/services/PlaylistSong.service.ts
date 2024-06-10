@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PlaylistSongRepository } from '../repository/playlist-song.repository';
+import { PlaylistSongRepository } from '../repository/PlaylistSong.repository';
 import { PlaylistSong } from '../models/business/PlaylistSong.model';
 import { Transaction } from 'sequelize';
 import { PlaylistSongDto } from '../dtos/PlaylistSongs.dto';

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UserPlaylistRepository } from '../repository/user-playlist.repository';
+import { UserPlaylistRepository } from '../repository/UserPlaylist.repository';
 import { Transaction } from 'sequelize';
-import { UserPlaylistDto } from '../dtos/user-playlist.dto';
+import { UserPlaylistDto } from '../dtos/UserPlaylist.dto';
 import { UserPlaylist } from '../models/business/UserPlaylist.model';
 
 @Injectable()

@@ -7,7 +7,7 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { SongService } from '../services/song.service';
+import { SongService } from '../services/Song.service';
 import { TrackDto } from '../dtos/Track.dto';
 import { ArtistDto } from '../dtos/Artist.dto';
 import { TrackInfoDto } from '../dtos/TrackInfo.dto';

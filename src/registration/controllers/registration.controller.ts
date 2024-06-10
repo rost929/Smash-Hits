@@ -6,9 +6,9 @@ import {
   Response,
   ValidationPipe,
 } from '@nestjs/common';
-import { RegistrationService } from '../services/registration.service';
-import { SignUpDto } from '../dtos/signup.dto';
-import { SignUpResponseDto } from '../dtos/signupResponse.dto';
+import { RegistrationService } from '../services/Registration.service';
+import { SignUpDto } from '../dtos/Signup.dto';
+import { SignUpResponseDto } from '../dtos/SignupResponse.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 @ApiTags('sign-up')
 @Controller('sign-up')

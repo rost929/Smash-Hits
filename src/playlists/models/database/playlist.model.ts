@@ -5,8 +5,8 @@ import {
   DataType,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { User } from '../../../users/models/database/user.model';
-import { Song } from '../../../songs/models/database/song.model';
+import { User } from '../../../users/models/database/User.model';
+import { Song } from '../../../songs/models/database/Song.model';
 import { Playlist_Song } from '../../../playlist-song/models/database/PlaylistSong.model';
 import { User_Playlist } from '../../../user-playlist/models/database/UserPlaylist.model';
 

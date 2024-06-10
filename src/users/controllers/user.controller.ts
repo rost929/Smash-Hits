@@ -1,6 +1,6 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { UserService } from '../services/user.service';
-import { UserDto } from '../dtos/user.dto';
+import { UserService } from '../services/User.service';
+import { UserDto } from '../dtos/User.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UsersResponseDto } from '../dtos/UsersResponse.dto';
 import {

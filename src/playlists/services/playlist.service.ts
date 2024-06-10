@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { PlaylistRepository } from '../repository/playlist.repository';
-import { UserService } from '../../users/services/user.service';
+import { PlaylistRepository } from '../repository/Playlist.repository';
+import { UserService } from '../../users/services/User.service';
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
-import { Playlist } from '../models/business/playlist.model';
+import { Playlist } from '../models/business/Playlist.model';
 import { CreatePlaylistResponseDto } from '../dtos/CreatePlaylistResponse.dto';
-import { UserPlaylistService } from '../../user-playlist/services/user-playlist.service';
+import { UserPlaylistService } from '../../user-playlist/services/UserPlaylist.service';
 import { Sequelize } from 'sequelize-typescript';
 import { PlaylistsResponseDto } from '../dtos/PlaylistsReponse.dto';
 import { OwnerDto } from '../dtos/Owner.dto';
 import { TitleDto } from '../dtos/Title.dto';
 import { PlaylistResponseDto } from '../dtos/PlaylistResponse.dto';
 import { UpdatePlaylistDto } from '../dtos/UpdatePlaylistDto';
-import { Playlists } from '../models/business/playlists.model';
+import { Playlists } from '../models/business/Playlists.model';
 import { PlaylistDto } from '../dtos/Playlist.dto';
-import { UserPlaylistDto } from '../../user-playlist/dtos/user-playlist.dto';
+import { UserPlaylistDto } from '../../user-playlist/dtos/UserPlaylist.dto';
 import { UserPlaylist } from 'src/user-playlist/models/business/UserPlaylist.model';
 
 @Injectable()

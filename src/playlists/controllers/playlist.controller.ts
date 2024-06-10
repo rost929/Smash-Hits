@@ -8,7 +8,7 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { PlaylistService } from '../services/playlist.service';
+import { PlaylistService } from '../services/Playlist.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreatePlaylistResponseDto } from '../dtos/CreatePlaylistResponse.dto';
 import { PlaylistsResponseDto } from '../dtos/PlaylistsReponse.dto';

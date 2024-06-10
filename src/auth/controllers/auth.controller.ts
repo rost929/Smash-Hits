@@ -6,10 +6,10 @@ import {
   Response,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthService } from '../services/auth.service';
-import { LoginDto } from '../dtos/login.dto';
+import { AuthService } from '../services/Auth.service';
+import { LoginDto } from '../dtos/Login.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { loginResponseDto } from '../dtos/loginResponse.dto';
+import { loginResponseDto } from '../dtos/LoginResponse.dto';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {

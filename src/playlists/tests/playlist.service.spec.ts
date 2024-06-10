@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PlaylistService } from '../services/playlist.service';
-import { UserService } from '../../users/services/user.service';
-import { UserPlaylistService } from '../../user-playlist/services/user-playlist.service';
-import { PlaylistRepository } from '../repository/playlist.repository';
+import { PlaylistService } from '../services/Playlist.service';
+import { UserService } from '../../users/services/User.service';
+import { UserPlaylistService } from '../../user-playlist/services/UserPlaylist.service';
+import { PlaylistRepository } from '../repository/Playlist.repository';
 import { Sequelize } from 'sequelize-typescript';
 import { CreatePlaylistDto } from '../dtos/CreatePlaylist.dto';
-import { UserDto } from '../../users/dtos/user.dto';
-import { PlaylistDto } from '../../playlists/dtos/Playlist.dto';
+import { UserDto } from '../../users/dtos/User.dto';
+import { PlaylistDto } from '../dtos/Playlist.dto';
 import Transaction from 'sequelize/types/transaction';
 
 describe('PlaylistService', () => {

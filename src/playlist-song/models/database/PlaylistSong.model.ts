@@ -5,8 +5,8 @@ import {
   ForeignKey,
   DataType,
 } from 'sequelize-typescript';
-import { Playlist } from '../../../playlists/models/database/playlist.model';
-import { Song } from '../../../songs/models/database/song.model';
+import { Playlist } from '../../../playlists/models/database/Playlist.model';
+import { Song } from '../../../songs/models/database/Song.model';
 
 @Table
 export class Playlist_Song extends Model<Playlist_Song> {

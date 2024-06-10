@@ -1,5 +1,5 @@
 import { Controller, Get, Query, ValidationPipe } from '@nestjs/common';
-import { SpotifyService } from '../services/spotify.service';
+import { SpotifyService } from '../services/Spotify.service';
 import { TrackDto } from '../../songs/dtos/Track.dto';
 import { ArtistDto } from '../../songs/dtos/Artist.dto';
 import { TrackInfoDto } from '../../songs/dtos/TrackInfo.dto';

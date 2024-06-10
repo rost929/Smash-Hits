@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { RegistrationController } from './controllers/registration.controller';
-import { RegistrationService } from './services/registration.service';
-import { UserModule } from '../users/user.module';
+import { RegistrationController } from './controllers/Registration.controller';
+import { RegistrationService } from './services/Registration.service';
+import { UserModule } from '../users/User.module';
 
 @Module({
   imports: [UserModule],

@@ -1,4 +1,4 @@
-import { Playlist } from '../models/database/playlist.model';
+import { Playlist } from '../models/database/Playlist.model';
 
 export class PlaylistResponseDto {
   playlist: Playlist;

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Playlist as PlaylistDbModel } from '../models/database/playlist.model';
-import { User } from '../../users/models/database/user.model';
+import { Playlist as PlaylistDbModel } from '../models/database/Playlist.model';
+import { User } from '../../users/models/database/User.model';
 import { Transaction } from 'sequelize';
-import { Playlist } from '../models/business/playlist.model';
-import { Playlists } from '../models/business/playlists.model';
+import { Playlist } from '../models/business/Playlist.model';
+import { Playlists } from '../models/business/Playlists.model';
 
 @Injectable()
 export class PlaylistRepository {

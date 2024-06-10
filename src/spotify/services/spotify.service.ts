@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SpotifyProvider } from '../providers/spotify.provider';
+import { SpotifyProvider } from '../providers/Spotify.provider';
 import { TrackInfoDto } from '../../songs/dtos/TrackInfo.dto';
 
 @Injectable()
